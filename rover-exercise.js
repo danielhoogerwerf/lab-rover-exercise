@@ -10,7 +10,7 @@ const Rover = {
 // FUNCTION DEFINITIONS
 // ====================
 function turnLeft(rover){
-  // Function where the rover instance will turn left, depending on the 
+  // Function where the rover will turn left, depending on the 
   // current 'direction'.
   switch (rover.direction) {
     case 'N':
@@ -35,7 +35,7 @@ function turnLeft(rover){
 }
 
 function turnRight(rover){
-  // Function where the rover instance will turn right, depending on the 
+  // Function where the rover will turn right, depending on the 
   // current 'direction'.
   switch (rover.direction) {
     case 'N':
@@ -60,7 +60,7 @@ function turnRight(rover){
 }
 
 function moveForward(rover){
-  // Move the rover instance forward, depending on the current direction.
+  // Move the rover forward, depending on the current direction.
   // First check for any 'obstacles' configured in the rover 'obstacle' parameter.
   for (let i = 0; i < rover.obstacles.length; i++) {
     if (rover.obstacles[i].x === rover.x && rover.obstacles[i].y === rover.y) {
@@ -113,11 +113,11 @@ function moveForward(rover){
 }
 
 function moveBackward(rover){
-  // Move the rover instance backward, depending on the current direction.
+  // Move the rover backward, depending on the current direction.
   // First check for any 'obstacles' configured in the rover 'obstacle' parameter.
   for (let i = 0; i < rover.obstacles.length; i++) {
     if (rover.obstacles[i].x === rover.x && rover.obstacles[i].y === rover.y) {
-      console.log('Obstacle detected! Cannot move forward.');
+      console.log('Obstacle detected! Cannot move backward.');
       rover.y++;
       return;
     }
@@ -195,7 +195,7 @@ function commandRover(rover, commands) {
 
 // MAIN PROGRAM
 // ============
-// Create a rover instance and execute specified commands
+// Create a rover and execute specified commands
 commandRover(Rover, 'rffrff');
 
 // Provide a final overview of the current state.
