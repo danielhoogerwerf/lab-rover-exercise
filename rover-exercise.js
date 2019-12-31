@@ -1,5 +1,4 @@
-// Rover Object Goes Here
-// ======================
+// Rover object goes here
 const Rover = {
   direction: 'N',
   x: 0,
@@ -8,14 +7,11 @@ const Rover = {
   travelLog: [{x:0,y:0}] 
 };
 
-// ======================
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max + 1);
-}
-
-
+// FUNCTION DEFINITIONS
+// ====================
 function turnLeft(rover){
-  //console.log("turnLeft was called");
+  // Function where the rover instance will turn left, depending on the 
+  // current 'direction'.
   switch (rover.direction) {
     case 'N':
       rover.direction = 'W';
@@ -34,11 +30,13 @@ function turnLeft(rover){
       console.log(`currently facing: ${rover.direction}`);
       break; 
   }
+  // Update the travelLog parameter with the current change.
   rover.travelLog.push({x: rover.x, y: rover.y}); 
 }
 
 function turnRight(rover){
-  //console.log("turnRight was called");
+  // Function where the rover instance will turn right, depending on the 
+  // current 'direction'.
   switch (rover.direction) {
     case 'N':
       rover.direction = 'E';
@@ -57,11 +55,13 @@ function turnRight(rover){
       console.log(`currently facing: ${rover.direction}`);
       break; 
   }
+  // Update the travelLog parameter with the current change.
   rover.travelLog.push({x: rover.x, y: rover.y}); 
 }
 
 function moveForward(rover){
-  //console.log("moveForward was called");
+  // Move the rover instance forward, depending on the current direction.
+  // First check for any 'obstacles' configured in the rover 'obstacle' parameter.
   for (let i = 0; i < rover.obstacles.length; i++) {
     if (rover.obstacles[i].x === rover.x && rover.obstacles[i].y === rover.y) {
       console.log('Obstacle detected! Cannot move forward.');
@@ -69,6 +69,7 @@ function moveForward(rover){
       return;
     }
   }
+  // Check direction and position and only move if the rover does not move of the grid
   switch (rover.direction) {
     case 'N':
       if (rover.y === 0) {
@@ -107,11 +108,13 @@ function moveForward(rover){
         break; 
       }
   }
+  // Update the travelLog parameter with the current change.
   rover.travelLog.push({x: rover.x, y: rover.y}); 
 }
 
 function moveBackward(rover){
-  //console.log("moveBackward was called");
+  // Move the rover instance backward, depending on the current direction.
+  // First check for any 'obstacles' configured in the rover 'obstacle' parameter.
   for (let i = 0; i < rover.obstacles.length; i++) {
     if (rover.obstacles[i].x === rover.x && rover.obstacles[i].y === rover.y) {
       console.log('Obstacle detected! Cannot move forward.');
@@ -119,6 +122,7 @@ function moveBackward(rover){
       return;
     }
   }
+  // Check direction and position and only move if the rover does not move of the grid
   switch (rover.direction) {
     case 'N':
       if (rover.y === 10) {
@@ -157,10 +161,13 @@ function moveBackward(rover){
         break; 
       }
   }
+  // Update the travelLog parameter with the current change.
   rover.travelLog.push({x: rover.x, y: rover.y}); 
 }
 
 function commandRover(rover, commands) {
+  // Slice the commands string and call connected function.
+  // If the command is not defined, then say so.
   for (let i = 0; i < commands.length; i++) {
     switch(commands[i]) {
       case 'f':
@@ -180,15 +187,18 @@ function commandRover(rover, commands) {
     }
   }
 
+  // Loop over and display the rover.travelLog contents at the end of the script
   for (let i = 0; i < rover.travelLog.length; i++) {
-    console.log(`Travel sequence: ${i} => Position: ${rover.travelLog[i].x}, ${rover.travelLog[i].y} `)
+    console.log(`Travel sequence: ${i} => Position: ${rover.travelLog[i].x}, ${rover.travelLog[i].y}`)
   }
 }
 
-//console.log(`Starting direction: ${Rover.direction}. Position: ${Rover.x}, ${Rover.y}`);
-
+// MAIN PROGRAM
+// ============
+// Create a rover instance and execute specified commands
 commandRover(Rover, 'rffrff');
 
-console.log(`Final facing: ${Rover.direction}. Position: ${Rover.x}, ${Rover.y}`);
+// Provide a final overview of the current state.
+console.log(`Final direction: ${Rover.direction}. Position: ${Rover.x}, ${Rover.y}`);
 
 
